@@ -1,0 +1,259 @@
+/*
+ * main.c
+ *
+ *  Created on: 05.01.2016
+ *      Author: Alija
+ */
+
+
+//----------------------------------------
+// BIOS header files
+//----------------------------------------
+#include <xdc/std.h>  						//mandatory - have to include first, for BIOS types
+#include <ti/sysbios/BIOS.h> 				//mandatory - if you call APIs like BIOS_start()
+#include <xdc/runtime/Error.h>
+#include <xdc/runtime/Log.h>				//needed for any Log_info() call
+#include <xdc/cfg/global.h> 				//header file for statically defined objects/handles
+
+//------------------------------------------
+// Standard Header Files
+//------------------------------------------
+#include <stdint.h>
+#include <stdbool.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+//------------------------------------------
+// TivaWare Header Files
+//------------------------------------------
+#include "inc/hw_memmap.h"
+#include "inc/hw_nvic.h"
+#include "inc/hw_sysctl.h"
+#include "inc/hw_types.h"
+// TiveWare Peripherals
+#include "driverlib/fpu.h"
+#include "driverlib/gpio.h"
+#include "driverlib/flash.h"
+#include "driverlib/interrupt.h"
+#include "driverlib/sysctl.h"
+#include "driverlib/systick.h"
+#include "driverlib/uart.h"
+#include "driverlib/udma.h"
+#include "driverlib/rom.h"
+#include "driverlib/rom_map.h"
+// TivaWare Graphic Library
+#include "grlib/grlib.h"
+#include "grlib/widget.h"
+#include "grlib/canvas.h"
+#include "grlib/checkbox.h"
+#include "grlib/container.h"
+#include "grlib/pushbutton.h"
+#include "grlib/radiobutton.h"
+#include "grlib/slider.h"
+// Utilities
+#include "utils/ustdlib.h"
+
+//------------------------------------------
+// Display Header Files
+//------------------------------------------
+#include "drivers/Kentec320x240x16_ssd2119_spi.h"
+#include "drivers/Kentec320x240x16_touch_tm4c1294xl.h"
+
+//------------------------------------------
+// User LED Header Files
+//------------------------------------------
+#include "drivers/LEDlib.h"
+
+//------------------------------------------
+// User Interface
+//------------------------------------------
+#include "utils/PIS_UI.h"
+#include "utils/PIS_UI_Images.h"
+
+//----------------------------------------
+// Prototypes
+//----------------------------------------
+void hardware_init(void);
+void handle_LCD(void);
+
+#define TITLE_XPOS		50
+#define TITLE_YPOS		12
+#define COPYRIGHT_XPOS	144
+#define COPYRIGHT_YPOS	225
+
+//---------------------------------------
+// Globals
+//---------------------------------------
+//------------------------------------------------------------------------------
+//
+// System clock rate in Hz.
+//
+//------------------------------------------------------------------------------
+uint32_t g_ui32SysClock;
+
+
+//------------------------------------------------------------------------------
+//
+// The DMA control structure table.
+//
+//------------------------------------------------------------------------------
+#ifdef ewarm
+#pragma data_alignment=1024
+tDMAControlTable psDMAControlTable[64];
+#elif defined(ccs)
+#pragma DATA_ALIGN(i16DMAControlTable, 1024)
+tDMAControlTable psDMAControlTable[64];
+#else
+tDMAControlTable psDMAControlTable[64] __attribute__ ((aligned(1024)));
+#endif
+
+
+
+
+//---------------------------------------------------------------------------
+// main()
+//---------------------------------------------------------------------------
+void main(void)
+{
+
+   hardware_init();							// init hardware via Xware
+
+   BIOS_start();
+
+}
+
+
+//---------------------------------------------------------------------------
+// hardware_init()
+//
+// initalize hardware for communication with display driver and for
+// measuring TS pen position.
+//---------------------------------------------------------------------------
+void hardware_init(void)
+{
+    tContext sContext;
+    tRectangle sRect;
+    //uint32_t ui32Idx;
+
+    //
+    // The FPU should be enabled because some compilers will use floating-
+    // point registers, even for non-floating-point code.  If the FPU is not
+    // enabled this will cause a fault.  This also ensures that floating-
+    // point operations could be added to this application and would work
+    // correctly and use the hardware floating-point unit.  Finally, lazy
+    // stacking is enabled for interrupt handlers.  This allows floating-
+    // point instructions to be used within interrupt handlers, but at the
+    // expense of extra stack usage.
+    //
+    FPUEnable();
+    FPULazyStackingEnable();
+
+    //
+    // Run from the PLL at 120 MHz.
+    //
+    g_ui32SysClock = MAP_SysCtlClockFreqSet((SYSCTL_XTAL_25MHZ |
+                SYSCTL_OSC_MAIN | SYSCTL_USE_PLL |
+                SYSCTL_CFG_VCO_480), 120000000);
+
+    //
+    // Initialize the display driver.
+    //
+    Kentec320x240x16_SSD2119Init(g_ui32SysClock);
+
+    //
+    // Initialize the graphics context.
+    //
+    GrContextInit(&sContext, &g_sKentec320x240x16_SSD2119);
+
+    //
+    // Fill the screen with white color.
+    //
+    sRect.i16XMin = 0;
+    sRect.i16YMin = 0;
+    sRect.i16XMax = GrContextDpyWidthGet(&sContext) - 1;
+    sRect.i16YMax = 239;
+    GrContextForegroundSet(&sContext, ClrWhite);
+    GrRectFill(&sContext, &sRect);
+
+    //
+    // Put the application name in the middle of the banner.
+    //
+    GrContextForegroundSet(&sContext, ClrBlack);
+    GrContextFontSet(&sContext, &g_sFontCm22);
+    GrStringDraw(&sContext, "Plant Irrigation System", -1, TITLE_XPOS, TITLE_YPOS, 0);
+    GrContextFontSet(&sContext, &g_sFontCm12);
+    GrStringDraw(&sContext, "Copyright (c) 2015 Sabic Alija", -1, COPYRIGHT_XPOS, COPYRIGHT_YPOS, 0);
+
+    //
+    // Configure and enable uDMA
+    //
+    SysCtlPeripheralEnable(SYSCTL_PERIPH_UDMA);
+    SysCtlDelay(10);
+    uDMAControlBaseSet(&psDMAControlTable[0]);
+    uDMAEnable();
+
+    //
+    // Initialize the touch screen driver and have it route its messages to the
+    // widget tree.
+    //
+    TouchScreenInit(g_ui32SysClock);
+    TouchScreenCallbackSet(WidgetPointerMessage);
+
+    //
+    // Add the first panel to the widget tree.
+    //
+    g_ui32Panel = 0;
+    WidgetAdd(WIDGET_ROOT, (tWidget *)g_psPanels);
+
+    //
+    // Issue the initial paint request to the widgets.
+    //
+    WidgetPaint(WIDGET_ROOT);
+    WidgetMessageQueueProcess();
+}
+
+//---------------------------------------------------------------------------
+// update_LCD()
+//
+// Process message in the widget message queue frequently
+//---------------------------------------------------------------------------
+void update_LCD(void)
+{
+	while(1)
+	{
+		// +++++++++++++++++++++++++++++++++++++++ LCD +++++++++++++++++++++++++++++++++++
+		//gateLCDKey = GateHwi_enter(gateLCD);
+		Hwi_disable();
+
+		WidgetMessageQueueProcess();
+
+		//GateHwi_leave(gateLCD, gateLCDKey);
+		Hwi_enable();
+		// +++++++++++++++++++++++++++++++++++++++ LCD +++++++++++++++++++++++++++++++++++
+
+		Task_sleep(200);
+	}
+}
+
+void PlantIrrigationSystem(void)
+{
+	while(1)
+	{
+		Mailbox_pend(PIS_Mbx, &msgPIS, BIOS_WAIT_FOREVER);
+
+		switch(msgPIS.ui8TaskID)
+		{
+		case Task_ID_0:
+			break;
+		case Task_ID_1:
+			break;
+		case Task_ID_2:
+			break;
+		default:
+			break;
+		}
+	}
+}
+
+
