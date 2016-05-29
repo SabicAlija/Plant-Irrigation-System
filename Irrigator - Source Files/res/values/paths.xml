@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="pot">M70,140 l15,60 l30,0 l15,-60 Z</string>
+    <string name="potShadow">M70,140 l5,20 l50,0 l5,-20 l-60,0 Z</string>
+    <string name="potTop">M67,140 l3,13 l60,0 l3,-13 l-68,0 Z</string>
+    <string name="SunflowerHeadLeaf10">M100,0 a12,12 0 0,1 0,24 a 12,12 0 0,1 0,-24</string>
+    <string name="SunflowerHeadLeaf11">M119,5 a12,12 0 0,1 0,24 a 12,12 0 0,1 0,-24</string>
+    <string name="SunflowerHeadLeaf12">M132,22 a12,12 0 0,1 0,24 a 12,12 0 0,1 0,-24</string>
+    <string name="SunflowerHeadLeaf20">M132,44 a12,12 0 0,1 0,24 a 12,12 0 0,1 0,-24</string>
+    <string name="SunflowerHeadLeaf21">M119,58 a12,12 0 0,1 0,24 a 12,12 0 0,1 0,-24</string>
+    <string name="SunflowerHeadLeaf22">M100,65 a12,12 0 0,1 0,24 a 12,12 0 0,1 0,-24</string>
+    <string name="SunflowerHeadLeaf30">M81,58 a12,12 0 0,1 0,24 a 12,12 0 0,1 0,-24</string>
+    <string name="SunflowerHeadLeaf31">M68,44 a 12,12 0 0,1 0,24 a 12,12 0 0,1 0,-24</string>
+    <string name="SunflowerHeadLeaf40">M68,22 a 12,12 0 0,1 0,24 a 12,12 0 0,1 0,-24</string>
+    <string name="SunflowerHeadLeaf41">M81,5 a 12,12 0 0,1 0,24 a 12,12 0 0,1 0,-24</string>
+    <string name="SunflowerHead">M100,15 a 30,30 0 0,1 0,60 a30,30 0 0,1 0,-60</string>
+    <string name="SunflowerHeadDark">M70,45 a 30,30 0 0,0 60,0 a30,23 0 0,1 -60,0</string>
+
+
+    <string name="SunflowerStem">M100,140 l2,0 l-4,0 l0,-70 l4,0 l0,70 Z</string>
+    <string name="SunflowerLeafLeft">M98,130 q0,-30 -35,-20</string>
+    <string name="SunflowerLeafLeftDark">M98,130 q-25,10 -35,-20</string>
+    <string name="SunflowerLeafRight">M102,120 q0,-30 35,-20</string>
+    <string name="SunflowerLeafRightDark">M102,120 q25,10 35,-20</string>
+
+    <string name="SunflowerMouth">M95,48 c0,5 10,5 10,0</string>
+    <string name="SunflowerMouthCircle1">M95,47 a1,1 0 0,1 0,2 a1,1 0 0,1 0,-2</string>
+    <string name="SunflowerMouthCircle2">M105,47 a1,1 0 0,1 0,2 a1,1 0 0,1 0,-2</string>
+
+
+</resources>

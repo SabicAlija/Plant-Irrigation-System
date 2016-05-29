@@ -1,0 +1,90 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="200dp"
+    android:height="200dp"
+    android:viewportWidth="200.0"
+    android:viewportHeight="200.0">
+  <!-- Pot -->
+  <path
+    android:fillColor="@color/colorPotBase"
+    android:pathData="@string/pot"/>
+  <path
+    android:fillColor="@color/colorPotShadow"
+    android:pathData="@string/potShadow"/>
+  <path
+      android:fillColor="@color/colorPotTop"
+      android:pathData="@string/potTop"/>
+
+  <!-- Stem -->
+  <path
+      android:fillColor="@color/colorPlantStem"
+      android:pathData="@string/SunflowerStem"/>
+  <!-- Leaves -->
+  <path
+      android:fillColor="@color/colorPlantStem"
+      android:pathData="@string/SunflowerLeafLeft"/>
+  <path
+      android:fillColor="@color/colorPlantLeaf"
+      android:pathData="@string/SunflowerLeafLeftDark"/>
+  <path
+      android:fillColor="@color/colorPlantStem"
+      android:pathData="@string/SunflowerLeafRight"/>
+  <path
+      android:fillColor="@color/colorPlantLeaf"
+      android:pathData="@string/SunflowerLeafRightDark"/>
+  <!-- Head Leaves -->
+  <path
+        android:fillColor="@color/colorSunflowerHeadLeaf"
+        android:pathData="@string/SunflowerHeadLeaf10"/>
+  <path
+        android:fillColor="@color/colorSunflowerHeadLeaf"
+        android:pathData="@string/SunflowerHeadLeaf11"/>
+  <path
+        android:fillColor="@color/colorSunflowerHeadLeaf"
+        android:pathData="@string/SunflowerHeadLeaf12"/>
+  <path
+        android:fillColor="@color/colorSunflowerHeadLeaf"
+        android:pathData="@string/SunflowerHeadLeaf20"/>
+  <path
+        android:fillColor="@color/colorSunflowerHeadLeaf"
+        android:pathData="@string/SunflowerHeadLeaf21"/>
+  <path
+        android:fillColor="@color/colorSunflowerHeadLeaf"
+        android:pathData="@string/SunflowerHeadLeaf22"/>
+  <path
+        android:fillColor="@color/colorSunflowerHeadLeaf"
+        android:pathData="@string/SunflowerHeadLeaf30"/>
+  <path
+        android:fillColor="@color/colorSunflowerHeadLeaf"
+        android:pathData="@string/SunflowerHeadLeaf31"/>
+  <path
+        android:fillColor="@color/colorSunflowerHeadLeaf"
+        android:pathData="@string/SunflowerHeadLeaf40"/>
+  <path
+        android:fillColor="@color/colorSunflowerHeadLeaf"
+        android:pathData="@string/SunflowerHeadLeaf41"/>
+  <!-- Head -->
+  <path
+        android:fillColor="@color/colorSunflowerHead"
+        android:pathData="@string/SunflowerHead"/>
+  <path
+      android:fillColor="@color/colorSunflowerHeadDark"
+      android:pathData="@string/SunflowerHeadDark"/>
+  <!-- Eyes -->
+  <path
+      android:fillColor="#1e1204"
+      android:pathData="M90,40 a2,2 0 0,1 0,4 a2,2 0 0,1 0,-4"/>
+  <path
+      android:fillColor="#1e1204"
+      android:pathData="M110,40 a2,2 0 0,1 0,4 a2,2 0 0,1 0,-4"/>
+  <!-- Mouth -->
+  <path
+      android:strokeWidth="2"
+      android:strokeColor="#1e1204"
+      android:pathData="@string/SunflowerMouth"/>
+  <path
+      android:fillColor="#1e1204"
+      android:pathData="@string/SunflowerMouthCircle1"/>
+  <path
+      android:fillColor="#1e1204"
+      android:pathData="@string/SunflowerMouthCircle2"/>
+</vector>
