@@ -326,13 +326,13 @@ static void WriteCommandGPIO(uint8_t ui8Data);
 pfnWriteData WriteData = WriteDataGPIO;
 pfnWriteCommand WriteCommand = WriteCommandGPIO;
 
-void LED_ON(void)
+void Kentec_LED_ON(void)
 {
 	GPIOPinWrite(LCD_BACKLIGHT_PORT, LCD_BACKLIGHT_PIN, 0);
 	GPIOPinWrite(LCD_USER_LED_PORT, LCD_USER_LED_1_PIN, LCD_USER_LED_1_PIN);
 }
 
-void LED_OFF(void)
+void Kentec_LED_OFF(void)
 {
 	GPIOPinWrite(LCD_BACKLIGHT_PORT, LCD_BACKLIGHT_PIN, LCD_BACKLIGHT_PIN);
 	GPIOPinWrite(LCD_USER_LED_PORT, LCD_USER_LED_1_PIN, 0);

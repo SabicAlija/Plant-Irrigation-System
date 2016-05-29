@@ -1,8 +1,8 @@
 #
-_XDCBUILDCOUNT = 
+_XDCBUILDCOUNT = 0
 ifneq (,$(findstring path,$(_USEXDCENV_)))
-override XDCPATH = C:/ti/tirtos_tivac_2_14_00_10/packages;C:/ti/tirtos_tivac_2_14_00_10/products/bios_6_42_01_20/packages;C:/ti/tirtos_tivac_2_14_00_10/products/ndk_2_24_03_35/packages;C:/ti/tirtos_tivac_2_14_00_10/products/uia_2_00_02_39/packages;C:/ti/ccsv6/ccs_base;C:/ti/Workspace/Plant_Irrigation_System/Irrigation_System/.config
-override XDCROOT = C:/ti/xdctools_3_31_01_33_core
+override XDCPATH = C:/ti/tirtos_tivac_2_16_01_14/packages;C:/ti/tirtos_tivac_2_16_01_14/products/tidrivers_tivac_2_16_01_13/packages;C:/ti/tirtos_tivac_2_16_01_14/products/bios_6_45_02_31/packages;C:/ti/tirtos_tivac_2_16_01_14/products/ndk_2_25_00_09/packages;C:/ti/tirtos_tivac_2_16_01_14/products/uia_2_00_05_50/packages;C:/ti/tirtos_tivac_2_16_01_14/products/ns_1_11_00_10/packages;C:/Workspace/CCS/Plant_Irrigation_System_2/Plant_Irrigation_System_2/.config
+override XDCROOT = C:/ti/xdctools_3_32_00_06_core
 override XDCBUILDCFG = ./config.bld
 endif
 ifneq (,$(findstring args,$(_USEXDCENV_)))
@@ -11,6 +11,6 @@ override XDCTARGETS =
 endif
 #
 ifeq (0,1)
-PKGPATH = C:/ti/tirtos_tivac_2_14_00_10/packages;C:/ti/tirtos_tivac_2_14_00_10/products/bios_6_42_01_20/packages;C:/ti/tirtos_tivac_2_14_00_10/products/ndk_2_24_03_35/packages;C:/ti/tirtos_tivac_2_14_00_10/products/uia_2_00_02_39/packages;C:/ti/ccsv6/ccs_base;C:/ti/Workspace/Plant_Irrigation_System/Irrigation_System/.config;C:/ti/xdctools_3_31_01_33_core/packages;..
+PKGPATH = C:/ti/tirtos_tivac_2_16_01_14/packages;C:/ti/tirtos_tivac_2_16_01_14/products/tidrivers_tivac_2_16_01_13/packages;C:/ti/tirtos_tivac_2_16_01_14/products/bios_6_45_02_31/packages;C:/ti/tirtos_tivac_2_16_01_14/products/ndk_2_25_00_09/packages;C:/ti/tirtos_tivac_2_16_01_14/products/uia_2_00_05_50/packages;C:/ti/tirtos_tivac_2_16_01_14/products/ns_1_11_00_10/packages;C:/Workspace/CCS/Plant_Irrigation_System_2/Plant_Irrigation_System_2/.config;C:/ti/xdctools_3_32_00_06_core/packages;..
 HOSTOS = Windows
 endif

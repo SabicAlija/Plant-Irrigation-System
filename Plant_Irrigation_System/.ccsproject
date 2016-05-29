@@ -10,4 +10,6 @@
 	<createSlaveProjects value=""/>
 	<templateProperties value="id=com.ti.rtsc.TIRTOStivac.example_8,type=rtsc,products=com.ti.rtsc.TIRTOStivac,xdcToolsVersion=3_31_01_33_core,target=ti.targets.arm.elf.M4F,platform=ti.platforms.tiva:TM4C1294NCPDT,buildProfile=release,isHybrid=true,configuroOptions=--compileOptions &quot;${COMPILER_FLAGS} &quot;,"/>
 	<isTargetManual value="true"/>
+	<origin value="C:/Workspace/CCS/Plant_Irrigation_System_2/Plant_Irrigation"/>
+	<connection value="common/targetdb/connections/Stellaris_ICDI_Connection.xml"/>
 </projectOptions>

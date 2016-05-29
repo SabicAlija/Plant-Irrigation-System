@@ -11,7 +11,7 @@ var makeAssembly = false;
 var Executable = xdc.module('xdc.bld.Executable');
 
 var exeOpts = new Executable.Attrs({
-        cfgScript: 'C:/ti/Workspace/Plant_Irrigation_System/Irrigation_System/empty.cfg',
+        cfgScript: 'C:/Workspace/CCS/Plant_Irrigation_System_2/Plant_Irrigation_System_2/empty.cfg',
         profile: 'release',
         cfgHome: 'xconfig_empty',
 });
@@ -40,8 +40,8 @@ else {
 }
 
 var thisObj = {
-    cfg:        'C:/ti/Workspace/Plant_Irrigation_System/Irrigation_System/empty.cfg',
-    outputPath: 'C:/ti/Workspace/Plant_Irrigation_System/Irrigation_System/.config/xconfig_empty',
+    cfg:        'C:/Workspace/CCS/Plant_Irrigation_System_2/Plant_Irrigation_System_2/empty.cfg',
+    outputPath: 'C:/Workspace/CCS/Plant_Irrigation_System_2/Plant_Irrigation_System_2/.config/xconfig_empty',
     exeName:    'empty' + suffix,
     exeIntName: 'empty' + suffix.replace('.', '_'),
     targ:       targ,

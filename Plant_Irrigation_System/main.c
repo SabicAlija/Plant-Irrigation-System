@@ -9,11 +9,20 @@
 //----------------------------------------
 // BIOS header files
 //----------------------------------------
+#include <Board/Board.h>
 #include <xdc/std.h>  						//mandatory - have to include first, for BIOS types
 #include <ti/sysbios/BIOS.h> 				//mandatory - if you call APIs like BIOS_start()
+#include <ti/sysbios/knl/Task.h>
 #include <xdc/runtime/Error.h>
 #include <xdc/runtime/Log.h>				//needed for any Log_info() call
+#include <xdc/runtime/System.h>
 #include <xdc/cfg/global.h> 				//header file for statically defined objects/handles
+#include <ti/drivers/GPIO.h>
+
+//------------------------------------------
+// NDK - bsd like sockets
+//------------------------------------------
+#include <sys/socket.h>
 
 //------------------------------------------
 // Standard Header Files
@@ -61,26 +70,34 @@
 #include "drivers/Kentec320x240x16_touch_tm4c1294xl.h"
 
 //------------------------------------------
-// User LED Header Files
+// Plant Irrigation Sytem - User Interface
 //------------------------------------------
-#include "drivers/LEDlib.h"
+#include <PlantIrrigationSystem/PIS_UI.h>
+#include <PlantIrrigationSystem/PIS_UI_Images.h>
 
 //------------------------------------------
-// User Interface
+// Plant Irrigation Sytem
 //------------------------------------------
-#include "utils/PIS_UI.h"
-#include "utils/PIS_UI_Images.h"
+#include <PlantIrrigationSystem/Plant_Irrigation_System.h>
+#include <PlantIrrigationSystem/Plant_Irrigation_Server.h>
+
+//------------------------------------------
+// Plant Irrigation System - Hardware
+//------------------------------------------
+#include "drivers/tpic6a595_hal.h"
+
+
 
 //----------------------------------------
 // Prototypes
 //----------------------------------------
 void hardware_init(void);
-void handle_LCD(void);
 
 #define TITLE_XPOS		50
 #define TITLE_YPOS		12
 #define COPYRIGHT_XPOS	144
 #define COPYRIGHT_YPOS	225
+
 
 //---------------------------------------
 // Globals
@@ -91,6 +108,15 @@ void handle_LCD(void);
 //
 //------------------------------------------------------------------------------
 uint32_t g_ui32SysClock;
+
+
+//------------------------------------------------------------------------------
+//
+// Plant Irrigation System
+//
+//------------------------------------------------------------------------------
+PlantIrrigationSystem_t g_System;
+
 
 
 //------------------------------------------------------------------------------
@@ -110,16 +136,40 @@ tDMAControlTable psDMAControlTable[64] __attribute__ ((aligned(1024)));
 
 
 
-
 //---------------------------------------------------------------------------
 // main()
 //---------------------------------------------------------------------------
 void main(void)
 {
 
-   hardware_init();							// init hardware via Xware
+	//
+	// Initialize Plant Irrigation System Object
+	//
+	initPlantIrrigationSystem(&g_System);
+	//startPlantIrrigationSystem(&g_System);
 
-   BIOS_start();
+
+	//
+	// Initialize Hardware via Xware
+	//
+	hardware_init();
+
+	//
+	// Initialize Board and Ethernet Driver
+	//
+	Board_initGeneral();
+	Board_initGPIO();
+	Board_initEMAC();
+
+	//
+	// Intialize valve control
+	//
+	initValveControl();
+
+	//
+	// Start TI-RTOS
+	//
+	BIOS_start();
 
 }
 
@@ -213,6 +263,22 @@ void hardware_init(void)
     WidgetMessageQueueProcess();
 }
 
+
+//---------------------------------------------------------------------------
+// init_PlantIrrigationSystem()
+//
+// Initialize PlantIrrigationSystem Task, Event and Mailbox
+//---------------------------------------------------------------------------
+void init_PlantIrrigationSystem(void)
+{
+	//
+	// Start Plant Irrigation System and enable control
+	// request handling on Port 36363
+	//
+	startPlantIrrigationSystem(&g_System);
+}
+
+
 //---------------------------------------------------------------------------
 // update_LCD()
 //
@@ -235,25 +301,3 @@ void update_LCD(void)
 		Task_sleep(200);
 	}
 }
-
-void PlantIrrigationSystem(void)
-{
-	while(1)
-	{
-		Mailbox_pend(PIS_Mbx, &msgPIS, BIOS_WAIT_FOREVER);
-
-		switch(msgPIS.ui8TaskID)
-		{
-		case Task_ID_0:
-			break;
-		case Task_ID_1:
-			break;
-		case Task_ID_2:
-			break;
-		default:
-			break;
-		}
-	}
-}
-
-
