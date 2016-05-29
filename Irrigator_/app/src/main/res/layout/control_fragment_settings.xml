@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="30dp"
+    android:paddingRight="30dp"
+    android:paddingTop="30dp"
+    android:paddingBottom="60dp"
+    android:id="@+id/control_settings_ll"
+    >
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorPrimaryDark"
+        android:textStyle="bold"
+        android:textSize="30dp"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/moisture_sensor_title"
+        android:id="@+id/control_settings_title"
+        android:layout_gravity="center_horizontal"
+        android:layout_weight="1" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:textColor="@color/colorFabPump"
+        android:textStyle="bold"
+        android:textSize="24dp"
+        android:text="@string/moisture_sensor_current"
+        android:id="@+id/control_settings_current_title"
+        android:layout_gravity="center_horizontal"
+        android:layout_weight="1" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:id="@+id/control_settings_current_value"
+        android:layout_gravity="center_horizontal"
+        android:layout_weight="1" />
+
+    <SeekBar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/control_settings_current_seekbar"
+        android:layout_gravity="center_horizontal"
+        android:layout_weight="2"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorFabPump"
+        android:textStyle="bold"
+        android:textSize="24dp"
+        android:text="@string/moisture_sensor_low"
+        android:id="@+id/control_settings_low_title"
+        android:layout_gravity="center_horizontal"
+        android:layout_weight="1" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:id="@+id/control_settings_low_value"
+        android:layout_gravity="center_horizontal"
+        android:layout_weight="1" />
+
+    <SeekBar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/control_settings_low_seekbar"
+        android:layout_gravity="center_horizontal"
+        android:layout_weight="2"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorFabPump"
+        android:textStyle="bold"
+        android:textSize="24dp"
+        android:text="@string/moisture_sensor_high"
+        android:id="@+id/control_settings_high_title"
+        android:layout_gravity="center_horizontal"
+        android:layout_weight="1" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:id="@+id/control_settings_high_value"
+        android:layout_gravity="center_horizontal"
+        android:layout_weight="1" />
+
+    <SeekBar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/control_settings_high_seekbar"
+        android:layout_gravity="center_horizontal"
+        android:layout_weight="2"
+        />
+
+</LinearLayout>

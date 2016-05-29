@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_plant1"
+            android:icon="@drawable/ic_menu_sunflower"
+            android:title="#1" />
+        <item
+            android:id="@+id/nav_plant2"
+            android:icon="@drawable/ic_menu_cactus"
+            android:title="#2" />
+        <item
+            android:id="@+id/nav_plant3"
+            android:icon="@drawable/ic_menu_tulip"
+            android:title="#3" />
+        <item
+            android:id="@+id/nav_plant4"
+            android:icon="@drawable/ic_menu_flower"
+            android:title="#4" />
+    </group>
+
+    <item android:title="Connection">
+        <menu>
+            <item
+                android:id="@+id/nav_interface"
+                android:icon="@drawable/ic_call_split_black_24dp"
+                android:title="Interface" />
+            <item
+                android:id="@+id/nav_node"
+                android:icon="@drawable/ic_settings_system_daydream_black_24dp"
+                android:title="Node" />
+        </menu>
+    </item>
+
+</menu>
