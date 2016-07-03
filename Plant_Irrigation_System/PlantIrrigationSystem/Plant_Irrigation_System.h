@@ -65,8 +65,8 @@
 #define PLANT_CMD_ECHO 							0       /**< Control Command: Echo */
 #define PLANT_CMD_AUTOMAT_ON 					1       /**< Control Command: Automatic irrigation on */
 #define PLANT_CMD_AUTOMAT_OFF 					2       /**< Control Command: Automatic irrigation off */
-#define PLANT_CMD_VALVE_OPEN 					3       /**< Control Command: Open valve */
-#define PLANT_CMD_VALVE_CLOSE 					4       /**< Control Command: Close valve */
+#define PLANT_CMD_VALVE_OPEN 					4       /**< Control Command: Open valve */
+#define PLANT_CMD_VALVE_CLOSE 					3       /**< Control Command: Close valve */
 #define PLANT_CMD_PUMP_ON 						5       /**< Control Command: Start pump */
 #define PLANT_CMD_PUMP_OFF 						6       /**< Control Command: Stop pump */
 #define PLANT_CMD_PUMP_DUTY_CYCLE 				7       /**< Control Command: Set pump dutycycle */

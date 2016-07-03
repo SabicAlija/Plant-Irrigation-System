@@ -571,13 +571,13 @@ OnValve(tWidget *psWidget)
 	// Button: OPEN
 	//
 	if(psWidget == (tWidget *) (g_psPushButtonsWatering))
-		action = 1;
+		action = 0;
 
 	//
 	// Button: CLOSE
 	//
 	else if(psWidget == (tWidget *) (g_psPushButtonsWatering + 1))
-		action = 0;
+		action = 1;
 
 	//
 	// Default
