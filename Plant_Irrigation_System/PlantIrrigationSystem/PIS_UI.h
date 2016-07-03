@@ -698,7 +698,7 @@ OnPump(tWidget *psWidget)
 			plantGateKey = GateMutex_enter(PlantIrrigationSystemGate);
 
 			// Check if Valve of active line is open.
-			if(g_System.Valve[g_ui8ActiveLine].State) {
+			//if(g_System.Valve[g_ui8ActiveLine].State) {
 
 				//
 				// Turn on pump.
@@ -710,7 +710,7 @@ OnPump(tWidget *psWidget)
 				// of 100% (!).
 				//
 				initPumpControl(g_System.Pump.DutyCycle);
-			}
+			//}
 
 			// Exit critical region.
 			GateMutex_leave(PlantIrrigationSystemGate, plantGateKey);

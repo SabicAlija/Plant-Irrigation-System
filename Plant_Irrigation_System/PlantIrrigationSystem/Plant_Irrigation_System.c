@@ -288,13 +288,13 @@ Void PlantIrrigationSystem(UArg arg0, UArg arg1) {
 						/** Enter critical region. Access Plant Irrigation System. */
 						plantGateKey = GateMutex_enter(PlantIrrigationSystemGate);
 
-						if(pSystem->Valve[ui8ActiveLine].State &&
-							systemIntent.Valve[ui8ActiveLine].State ) {
+						//if(pSystem->Valve[ui8ActiveLine].State &&
+						//	systemIntent.Valve[ui8ActiveLine].State ) {
 
 							pSystem->Pump.State = 1;
 
 							initPumpControl(pSystem->Pump.DutyCycle);
-						}
+						//}
 
 						/** Exit critical region. */
 						GateMutex_leave(PlantIrrigationSystemGate, plantGateKey);
